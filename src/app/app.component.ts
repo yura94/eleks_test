@@ -9,7 +9,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {}
   state = [] ||localStorage.getItem('state');
   takeCryptData() {
-    localStorage.setItem("state", "111"); 
+    localStorage.setItem("state", "11"); 
     fetch('https://api.punkapi.com/v2/beers/')
       .then((response) => {
         return response.json();
@@ -27,9 +27,9 @@ export class AppComponent implements OnInit {
         return response.json();
       })
       .then((data) => {
-        localStorage.setItem("state", data.drinks[0]); 
+        localStorage.setItem("state", data); 
         this.state = data;
-        console.log(data.drinks[0]);
+        console.log(data);
       });
   }
 }

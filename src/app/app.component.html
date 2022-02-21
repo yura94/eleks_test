@@ -1,4 +1,7 @@
-<button>Home</button>
-<button (click)="takeCryptData()">Crypto</button>
-<button (click)="takeMenuData()">Alcohol</button>
-<h1>{{state}}</h1>
+<button routerLink="">Home</button>
+<button routerLink="beer">beer</button>
+<button routerLink="cocktails">coctails</button>
+<button>404</button>
+
+
+<router-outlet></router-outlet>
