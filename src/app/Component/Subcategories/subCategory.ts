@@ -1,14 +1,10 @@
-import { Component,  OnInit  } from "@angular/core";
-
-
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-    templateUrl: './subCategory.html',
-    styleUrls: ['./subCategory.scss'],
-  })
-
-
-
-export class subCategory{
-
+  selector: 'app-subcategory',
+  templateUrl: './subCategory.html',
+  styleUrls: ['./subCategory.scss'],
+})
+export class subCategoryComponent {
+  @Input() data: any;
 }

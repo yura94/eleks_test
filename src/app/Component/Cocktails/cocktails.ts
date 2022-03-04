@@ -1,25 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { CocktailService } from 'src/app/Services/cocktail.service';
+import { subCategoryComponent } from '../Subcategories/subCategory';
 
 @Component({
-    templateUrl: './cocktails.html',
-    styleUrls: ['./cocktails.scss'],
-  })
+  templateUrl: './cocktails.html',
+  styleUrls: ['./cocktails.scss'],
+})
+export class CocktailsComponent {
+  Data: any;
 
-  export class CocktailsComponent{
+  constructor(private cocktailService: CocktailService) {}
 
-     Data:any;
-
-    constructor(private cocktailService : CocktailService){
-    }
-
-    ngOnInit(){
-         this.cocktailService.getCategories().subscribe(
-           categories => {
-             this.Data = categories
-           }
-         )
-      
-    }
-    
+  ngOnInit() {
+    this.cocktailService.getCategories().subscribe(categories => {
+      this.Data = categories;
+    });
   }
+}

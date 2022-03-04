@@ -11,7 +11,7 @@ export class BeerComponent {
   constructor(private beerService: BeerService) {}
 
   ngOnInit() {
-    this.beerService.getCategories().subscribe((categories) => {
+    this.beerService.getCategories().subscribe(categories => {
       this.Data = categories;
     });
   }

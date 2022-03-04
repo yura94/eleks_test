@@ -1,12 +1,13 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class CocktailService {
-    constructor(private http : HttpClient){
-    }
+  constructor(private http: HttpClient) {}
 
-    getCategories(){
-        return this.http.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list')
-    }
+  getCategories() {
+    return this.http.get(
+      'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list'
+    );
+  }
 }
