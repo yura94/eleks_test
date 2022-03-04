@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { BeerComponent} from '../app/Component/Beer/beer';
 import { CocktailsComponent} from '../app/Component/Cocktails/cocktails';
 import { HomeComponent} from '../app/Component/homePage/home';
+import { CocktailService } from './Services/cocktail.service';
+import { BeerService } from './Services/beer.service';
 
 const appRoutes : Routes = [
   {path: "", component : HomeComponent},
@@ -28,7 +30,7 @@ const appRoutes : Routes = [
     HttpClientModule
 
   ],
-  providers: [],
+  providers: [CocktailService , BeerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { CocktailService } from 'src/app/Services/cocktail.service';
 
 @Component({
     templateUrl: './cocktails.html',
@@ -7,11 +7,19 @@ import { HttpClient } from '@angular/common/http';
   })
 
   export class CocktailsComponent{
-    constructor(private http : HttpClient){
+
+     Data:any;
+
+    constructor(private cocktailService : CocktailService){
     }
 
     ngOnInit(){
-      this.http.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?g=Cocktail_glass')
-      .subscribe((data) => console.log(data))
+         this.cocktailService.getCategories().subscribe(
+           categories => {
+             this.Data = categories
+           }
+         )
+      
     }
+    
   }
