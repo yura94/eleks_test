@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CocktailService } from 'src/app/Services/cocktail.service';
-import { subCategoryComponent } from '../Subcategories/subCategory';
 
 @Component({
   templateUrl: './cocktails.html',

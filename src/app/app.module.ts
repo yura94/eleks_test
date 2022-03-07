@@ -10,6 +10,7 @@ import { CocktailsComponent } from '../app/Component/Cocktails/cocktails';
 import { HomeComponent } from '../app/Component/homePage/home';
 import { CocktailService } from './Services/cocktail.service';
 import { BeerService } from './Services/beer.service';
+import { subCategoryComponent } from './Component/Subcategories/subCategory';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,7 +19,12 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, BeerComponent, CocktailsComponent],
+  declarations: [
+    AppComponent,
+    BeerComponent,
+    CocktailsComponent,
+    subCategoryComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
