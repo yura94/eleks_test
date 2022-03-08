@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 
 @Injectable()
 export class BeerService {
+
+  
   constructor(private http: HttpClient) {}
 
   getCategories() {

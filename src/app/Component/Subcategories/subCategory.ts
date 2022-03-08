@@ -6,5 +6,6 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./subCategory.scss'],
 })
 export class subCategoryComponent {
-  @Input() data: any;
+  @Input() categorylList: any;
+  
 }
