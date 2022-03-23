@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { SubCategory } from 'src/app/interfaces/subcategory.interface';
 
 @Component({
   selector: 'app-subcategory',
@@ -6,6 +7,5 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./subCategory.scss'],
 })
 export class subCategoryComponent {
-  @Input() categorylList: any;
-  
+  @Input() categorylList: SubCategory[] = [];
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CocktailService } from 'src/app/Services/cocktail.service';
 import { map } from 'rxjs';
+import { SubCategory } from 'src/app/interfaces/subcategory.interface';
 
 @Component({
   templateUrl: './cocktails.html',
@@ -8,13 +9,21 @@ import { map } from 'rxjs';
 })
 export class CocktailsComponent {
   constructor(private cocktailService: CocktailService) {}
-   coctailCategory: any;
-    
+  cocktailCategory: SubCategory[] = [];
 
   ngOnInit() {
-    this.cocktailService.getCategories().pipe(map((categoryes:any)  => categoryes = categoryes.drinks)).subscribe(categories => {
-      this.coctailCategory = categories;
-    });
+    this.cocktailService
+      .getCategories()
+      .pipe(
+        map(category => {
+          return category.drinks.map(value => ({
+            label: value.strCategory,
+            value: value.strCategory,
+          }));
+        })
+      )
+      .subscribe(categories => {
+        this.cocktailCategory = categories;
+      });
   }
-  
 }
