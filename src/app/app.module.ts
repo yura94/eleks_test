@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,12 +10,9 @@ import { HomeComponent } from '../app/Component/homePage/home';
 import { CocktailService } from './Services/cocktail.service';
 import { BeerService } from './Services/beer.service';
 import { subCategoryComponent } from './Component/Subcategories/subCategory';
+import { NotFoundComponent } from './Component/NotFound/not-found.component';
 
-const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'beer', component: BeerComponent },
-  { path: 'cocktails', component: CocktailsComponent },
-];
+
 
 @NgModule({
   declarations: [
@@ -24,12 +20,13 @@ const appRoutes: Routes = [
     BeerComponent,
     CocktailsComponent,
     subCategoryComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(appRoutes),
     HttpClientModule,
+    AppRoutingModule
   ],
   providers: [CocktailService, BeerService],
   bootstrap: [AppComponent],
