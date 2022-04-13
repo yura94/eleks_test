@@ -1,3 +1,8 @@
-<button class="container" *ngFor="let item of categorylList">
+<!-- <button class="container" *ngFor="let item of categorylList">
   {{ item.label }}
-</button>
+</button> -->
+
+
+<mat-button-toggle-group name="fontStyle" aria-label="Font Style" class="container">
+  <mat-button-toggle  *ngFor="let item of categorylList">{{ item.label }}</mat-button-toggle>
+</mat-button-toggle-group>
