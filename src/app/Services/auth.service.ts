@@ -6,45 +6,63 @@ import { User } from '../interfaces/auth.interface';
 export class AuthService {
   constructor(private router: Router) {}
 
-   private readonly users: readonly User[] = [ 
-    { name: "Yura", surname: "Lenko" , email: 'Yura.lenko@gmail.com', password: '123456' },
-    { name: "Vasyl", surname: "Lenko" , email: 'Vasyl.lenko@gmail.com', password: '1234567'  },
-    { name: "Ostap", surname: "Lenko" , email: 'Ostap.lenko@gmail.com', password: '12345678'  },  
+  private readonly users: readonly User[] = [
+    {
+      name: 'Yura',
+      surname: 'Lenko',
+      email: 'Yura.lenko@gmail.com',
+      password: '123456',
+    },
+    {
+      name: 'Vasyl',
+      surname: 'Lenko',
+      email: 'Vasyl.lenko@gmail.com',
+      password: '1234567',
+    },
+    {
+      name: 'Ostap',
+      surname: 'Lenko',
+      email: 'Ostap.lenko@gmail.com',
+      password: '12345678',
+    },
   ];
 
-  private currentUser: User | null = null;
-
-  private findUser(email: string , password:string): User | undefined{
+  private findUser(email: string, password: string): User | undefined {
     return this.users.find(
-        user =>user.email === email && user.password === password 
-    ) 
+      user => user.email === email && user.password === password
+    );
   }
 
-  login(email: string , password:string): boolean{
-    const user = this.findUser(email, password);
-    if(user){
-         this.authenticate(user);
-         this.router.navigate([''])
-         return true; 
-    } else{
-        return false;
+  login(email: string, password: string): { status: number; message: string } {
+    if (!this.users.find(user => user.email === email)) {
+      return { status: 401, message: 'Incorrect email' };
     }
+    const user = this.findUser(email, password);
+    if (!user) {
+      return { status: 401, message: 'Incorrect password' };
+    }
+    this.autentifacate(user);
+    return { status: 200, message: 'OK' };
   }
 
   get isAuthenticated(): boolean {
-     return this.currentUser !== null 
+    return localStorage.getItem('userData') !== null;
   }
 
-  get user(): User | null{
-      return this.currentUser
+  get user(): User | null {
+    const user: string | null = localStorage.getItem('userData');
+    if (user === null) {
+      return null;
+    }
+    return JSON.parse(user);
   }
 
-  logout(): void{
-      this.currentUser = null;
-      this.router.navigate([''])
+  logout(): void {
+    localStorage.removeItem('userData');
+    this.router.navigate(['']);
   }
 
-  private authenticate(user: User): void{
-      this.currentUser = user;
+  private autentifacate(user: User): void {
+    localStorage.setItem('userData', JSON.stringify(user));
   }
 }

@@ -6,6 +6,6 @@ import { SubCategory } from 'src/app/interfaces/subcategory.interface';
   templateUrl: './subCategory.html',
   styleUrls: ['./subCategory.scss'],
 })
-export class subCategoryComponent {
+export class SubCategoryComponent {
   @Input() categorylList: SubCategory[] = [];
 }

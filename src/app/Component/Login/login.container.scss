@@ -1,14 +1,14 @@
 .login-container{
-    position: absolute;
-    top: 15vh;
-    right: 5vw;
-    border: 1px solid black;
-    width: fit-content;
-    padding: 10px;
-    input{
-        margin: 5px;
-    }
-    .ng-invalid.ng-touched{
-        border-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    
+    .form-container{
+        display: flex;
+        flex-direction: column;
+        .error{
+            color: red;
+        }
     }
 }

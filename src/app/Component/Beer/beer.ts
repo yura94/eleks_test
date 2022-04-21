@@ -6,10 +6,9 @@ import { BeerService } from 'src/app/Services/beer.service';
   templateUrl: './beer.html',
   styleUrls: ['./beer.scss'],
 })
-export class BeerComponent {
+export class BeerComponent implements OnInit {
+  beerColor: SubCategory[] = [];
 
-  beerColor : SubCategory[]= [];
-  
   beercategory: any = {
     beerCategory: '',
   };
@@ -20,6 +19,6 @@ export class BeerComponent {
     this.beerService.getCategories().subscribe(categories => {
       this.beercategory.beerCategory = categories;
     });
-    this.beerColor = this.beerService.beerColor
+    this.beerColor = this.beerService.beerColor;
   }
 }

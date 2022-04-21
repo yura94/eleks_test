@@ -1,8 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
-    templateUrl: './navBar.html',
-    styleUrls: ['./navBar.scss'],
-  })
+  selector: 'app-navbar',
+  templateUrl: './navBar.html',
+  styleUrls: ['./navBar.scss'],
+})
+export class NavBarComponent implements DoCheck {
+  constructor(private authservice: AuthService) {}
 
-  export class NavBar{}
+  ngDoCheck(): void {
+    this.authTogle = this.authservice.isAuthenticated;
+  }
+  authTogle: boolean = false;
+
+  signOut() {
+    this.authservice.logout();
+  }
+}

@@ -7,7 +7,7 @@ import { SubCategory } from 'src/app/interfaces/subcategory.interface';
   templateUrl: './cocktails.html',
   styleUrls: ['./cocktails.scss'],
 })
-export class CocktailsComponent {
+export class CocktailsComponent implements OnInit {
   constructor(private cocktailService: CocktailService) {}
   cocktailCategory: SubCategory[] = [];
 
