@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterLinkActive, RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './Component/Login/login.component';
 import { BeerComponent } from './Component/Beer/beer';
@@ -16,11 +16,13 @@ const appRoutes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'beer', component: BeerComponent, canActivate: [AuthGuard] },
+      { path: 'beer/:category', component: BeerComponent },
       {
         path: 'cocktails',
         component: CocktailsComponent,
         canActivate: [AuthGuard],
       },
+      { path: 'cocktails/:category', component: CocktailsComponent },
     ],
   },
   { path: 'not-found', component: NotFoundComponent },

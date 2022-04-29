@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,7 @@ import { AuthService } from './Services/auth.service';
 import { NavBarComponent } from './Component/NavBar/navBar';
 import { HomeComponent } from './Component/HomePage/home';
 import { WrapperComponent } from './Component/Wrapper/wrapper.component';
+import { CategoryListComponent } from './Component/category-list/category-list.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { WrapperComponent } from './Component/Wrapper/wrapper.component';
     NavBarComponent,
     HomeComponent,
     WrapperComponent,
+    CategoryListComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { WrapperComponent } from './Component/Wrapper/wrapper.component';
     MatButtonToggleModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule,
   ],
   providers: [CocktailService, BeerService, AuthService],
   bootstrap: [AppComponent],
