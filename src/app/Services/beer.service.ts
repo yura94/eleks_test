@@ -1,13 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { filter, map, Observable } from 'rxjs';
-import { CategorylistInterface } from '../interfaces/category-list.interface';
+import { map, Observable } from 'rxjs';
+import {
+  BeerCategoryInterface,
+  BeerInterface,
+} from '../interfaces/beer.interface';
 
 @Injectable()
 export class BeerService {
   constructor(private http: HttpClient) {}
 
-  beerColor = [
+  beerCategory: BeerCategoryInterface[] = [
     { label: 'Pale Straw', value: '4', url: '/beer' },
     { label: 'Straw', value: '5', url: '/beer' },
     { label: 'Pale Gold', value: '6', url: '/beer' },
@@ -22,24 +25,34 @@ export class BeerService {
     { label: 'ABlack', value: '40', url: '/beer' },
   ];
 
-  getCategories(perPage: number, activeItem: string | null): Observable<any> {
+  beer(perPage: number, beerAvb: string | null): Observable<BeerInterface[]> {
     return this.http
-      .get<CategorylistInterface>(
+      .get<BeerInterface[]>(
         `https://api.punkapi.com/v2/beers?page=1&per_page=${perPage}`
       )
       .pipe(
-        map(list => {
-          if (activeItem == null) {
-            return list;
+        map(beers => {
+          if (beerAvb == null) {
+            return beers;
           }
-          return this.filterBeerList(list, activeItem);
+          return this.filterBeerByAvb(beers, beerAvb);
         })
       );
   }
 
-  filterBeerList(list: any, activeItem: string) {
-    return list.filter((item: any) => {
-      return +activeItem === Math.floor(item.abv);
+  filterBeerByAvb(beers: BeerInterface[], beerAvb: string): BeerInterface[] {
+    return beers.filter((beer: BeerInterface) => {
+      return +beerAvb === Math.floor(+beer.abv);
     });
+  }
+
+  getBeerById(id: string): Observable<BeerInterface> {
+    return this.http
+      .get<BeerInterface[]>(`https://api.punkapi.com/v2/beers/${id}`)
+      .pipe(
+        map(beer => {
+          return beer[0];
+        })
+      );
   }
 }

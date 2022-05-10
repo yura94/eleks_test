@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
-import { RouterLinkActive, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent } from './Component/Login/login.component';
-import { BeerComponent } from './Component/Beer/beer';
-import { CocktailsComponent } from './Component/Cocktails/cocktails';
-import { HomeComponent } from './Component/HomePage/home';
-import { NotFoundComponent } from './Component/NotFound/not-found.component';
+import { LoginComponent } from './components/login/login.component';
+import { BeersComponent } from './components/beers/beers.component';
+import { CocktailsComponent } from './components/cocktails/cocktails';
+import { HomeComponent } from './components/homePage/home-page.component';
+import { NotFoundComponent } from './components/notFound/not-found.component';
 import { AuthGuard } from './auth.guard';
-import { WrapperComponent } from './Component/Wrapper/wrapper.component';
+import { WrapperComponent } from './components/wrapper/wrapper.component';
+import { BeerItemComponent } from './components/beer-item/beer-item.component';
+import { CocktailItemComponent } from './components/cocktail-item/cocktails-item.component';
 
 const appRoutes: Routes = [
   {
@@ -15,14 +17,17 @@ const appRoutes: Routes = [
     component: WrapperComponent,
     children: [
       { path: 'home', component: HomeComponent },
-      { path: 'beer', component: BeerComponent, canActivate: [AuthGuard] },
-      { path: 'beer/:category', component: BeerComponent },
+      { path: 'beer', component: BeersComponent, canActivate: [AuthGuard] },
+      { path: 'beer/categoryes/:category', component: BeersComponent },
+      { path: 'beer/:id', component: BeerItemComponent },
       {
         path: 'cocktails',
         component: CocktailsComponent,
         canActivate: [AuthGuard],
       },
-      { path: 'cocktails/:category', component: CocktailsComponent },
+
+      { path: 'cocktails/categoryes/:category', component: CocktailsComponent },
+      { path: 'cocktails/:id', component: CocktailItemComponent },
     ],
   },
   { path: 'not-found', component: NotFoundComponent },

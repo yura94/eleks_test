@@ -1,10 +1,10 @@
 import { Component, DoCheck } from '@angular/core';
-import { AuthService } from 'src/app/Services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
-  templateUrl: './navBar.html',
-  styleUrls: ['./navBar.scss'],
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.html'],
 })
 export class NavBarComponent implements DoCheck {
   constructor(private authservice: AuthService) {}

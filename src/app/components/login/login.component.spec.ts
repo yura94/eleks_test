@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/Services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { LoginComponent } from './login.component';
 
 class MockUserService {

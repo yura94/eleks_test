@@ -4,7 +4,8 @@
   class="container">
   <mat-button-toggle
     *ngFor="let item of categorylList"
-    [routerLink]="[item.url, item.value]">
+    routerLinkActive="mat-button-toggle-checked"
+    [routerLink]="[item.url, 'categoryes', item.value]">
     {{ item.label }}
   </mat-button-toggle>
 </mat-button-toggle-group>

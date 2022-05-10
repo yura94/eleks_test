@@ -1,0 +1,12 @@
+<div *ngIf="spinerLoading" class="spiner">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="coctailList">
+  <app-subcategory [categorylList]="cocktailCategories"></app-subcategory>
+</div>
+<h3>cocktails</h3>
+<app-category-list
+  [selectedCategory]="selectedCoctailCategory"
+  categoryRoute="cocktails"
+  [columDef]="columnDefs"></app-category-list>

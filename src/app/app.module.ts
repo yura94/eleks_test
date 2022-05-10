@@ -8,25 +8,30 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BeerComponent } from '../app/Component/Beer/beer';
-import { CocktailsComponent } from '../app/Component/Cocktails/cocktails';
-import { CocktailService } from './Services/cocktail.service';
-import { BeerService } from './Services/beer.service';
-import { SubCategoryComponent } from './Component/Subcategories/subCategory';
-import { NotFoundComponent } from './Component/NotFound/not-found.component';
+import { BeersComponent } from './components/beers/beers.component';
+import { CocktailsComponent } from './components/cocktails/cocktails';
+import { CocktailService } from './services/cocktail.service';
+import { BeerService } from './services/beer.service';
+import { SubCategoryComponent } from './components/subcategories/sub-category.component';
+import { NotFoundComponent } from './components/notFound/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './Component/Login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from './Services/auth.service';
-import { NavBarComponent } from './Component/NavBar/navBar';
-import { HomeComponent } from './Component/HomePage/home';
-import { WrapperComponent } from './Component/Wrapper/wrapper.component';
-import { CategoryListComponent } from './Component/category-list/category-list.component';
+import { AuthService } from './services/auth.service';
+import { NavBarComponent } from './components/navBar/nav-bar.component';
+import { HomeComponent } from './components/homePage/home-page.component';
+import { WrapperComponent } from './components/wrapper/wrapper.component';
+import { CategoryListComponent } from './components/category-list/category-list.component';
+import { BeerItemComponent } from './components/beer-item/beer-item.component';
+import { CocktailItemComponent } from './components/cocktail-item/cocktails-item.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { PictureCellRendererComponent } from './components/ag-grid/picture-cell-renderer.component';
+import { NameCocktailCellRendererComponent } from './components/ag-grid/name-cocktail-cell-renderer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BeerComponent,
+    BeersComponent,
     CocktailsComponent,
     SubCategoryComponent,
     NotFoundComponent,
@@ -35,6 +40,10 @@ import { CategoryListComponent } from './Component/category-list/category-list.c
     HomeComponent,
     WrapperComponent,
     CategoryListComponent,
+    BeerItemComponent,
+    CocktailItemComponent,
+    PictureCellRendererComponent,
+    NameCocktailCellRendererComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +55,10 @@ import { CategoryListComponent } from './Component/category-list/category-list.c
     MatInputModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
+    AgGridModule.withComponents([
+      PictureCellRendererComponent,
+      NameCocktailCellRendererComponent,
+    ]),
   ],
   providers: [CocktailService, BeerService, AuthService],
   bootstrap: [AppComponent],
