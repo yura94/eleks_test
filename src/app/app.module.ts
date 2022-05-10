@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatInputModule } from '@angular/material/input';
@@ -27,6 +27,7 @@ import { CocktailItemComponent } from './components/cocktail-item/cocktails-item
 import { AgGridModule } from 'ag-grid-angular';
 import { PictureCellRendererComponent } from './components/ag-grid/picture-cell-renderer.component';
 import { NameCocktailCellRendererComponent } from './components/ag-grid/name-cocktail-cell-renderer.component';
+import { FailInterceptor } from './interceptors/fail.interceptor';
 
 @NgModule({
   declarations: [
@@ -55,12 +56,14 @@ import { NameCocktailCellRendererComponent } from './components/ag-grid/name-coc
     MatInputModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
-    AgGridModule.withComponents([
-      PictureCellRendererComponent,
-      NameCocktailCellRendererComponent,
-    ]),
+    AgGridModule.withComponents([PictureCellRendererComponent, NameCocktailCellRendererComponent]),
   ],
-  providers: [CocktailService, BeerService, AuthService],
+  providers: [
+    CocktailService,
+    BeerService,
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: FailInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
