@@ -2,7 +2,4 @@
   <app-subcategory [categorylList]="beerCategory"></app-subcategory>
 </div>
 
-<app-category-list
-  [selectedCategory]="beers"
-  categoryRoute="beer"
-  [columDef]="columnDefs"></app-category-list>
+<app-category-list [selectedCategory]="beers$ | async" categoryRoute="beer" [columDef]="columnDefs"></app-category-list>

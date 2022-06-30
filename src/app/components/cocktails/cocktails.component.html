@@ -3,10 +3,12 @@
 </div>
 
 <div class="coctailList">
-  <app-subcategory [categorylList]="cocktailCategories"></app-subcategory>
+  <app-subcategory
+    *ngIf="cocktailCategories$ | async as cocktailCategories"
+    [categorylList]="cocktailCategories"></app-subcategory>
 </div>
 <h3>cocktails</h3>
 <app-category-list
-  [selectedCategory]="selectedCoctailCategory"
+  [selectedCategory]="selectedCoctailCategory$ | async"
   categoryRoute="cocktails"
   [columDef]="columnDefs"></app-category-list>

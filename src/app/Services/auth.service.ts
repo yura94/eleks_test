@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { delay, fromEvent, map, Observable, startWith } from 'rxjs';
 import { User } from '../interfaces/auth.interface';
 
 @Injectable()
 export class AuthService {
   constructor(private router: Router) {}
-
   private readonly users: readonly User[] = [
     {
       name: 'Yura',
@@ -28,9 +28,7 @@ export class AuthService {
   ];
 
   private findUser(email: string, password: string): User | undefined {
-    return this.users.find(
-      user => user.email === email && user.password === password
-    );
+    return this.users.find(user => user.email === email && user.password === password);
   }
 
   login(email: string, password: string): { status: number; message: string } {
@@ -46,23 +44,29 @@ export class AuthService {
   }
 
   get isAuthenticated(): boolean {
-    return localStorage.getItem('userData') !== null;
+    return window.localStorage.getItem('userData') !== null;
   }
-
   get user(): User | null {
-    const user: string | null = localStorage.getItem('userData');
+    const user: string | null = window.localStorage.getItem('userData');
     if (user === null) {
       return null;
     }
     return JSON.parse(user);
   }
-
   logout(): void {
-    localStorage.removeItem('userData');
-    this.router.navigate(['']);
+    window.localStorage.removeItem('userData');
+    this.router.navigate(['beer']);
+    window.dispatchEvent(new StorageEvent('storage'));
   }
 
   private autentifacate(user: User): void {
-    localStorage.setItem('userData', JSON.stringify(user));
+    window.localStorage.setItem('userData', JSON.stringify(user));
+    window.dispatchEvent(new StorageEvent('storage'));
+    // window.addEventListener('storage', function () {}, false);
   }
+
+  source$: Observable<boolean> = fromEvent(window, 'storage').pipe(
+    map(() => this.isAuthenticated),
+    startWith(this.isAuthenticated)
+  );
 }

@@ -1,10 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import {
-  BeerCategoryInterface,
-  BeerInterface,
-} from '../interfaces/beer.interface';
+import { BeerCategoryInterface, BeerInterface } from '../interfaces/beer.interface';
 
 @Injectable()
 export class BeerService {
@@ -26,18 +23,14 @@ export class BeerService {
   ];
 
   beer(perPage: number, beerAvb: string | null): Observable<BeerInterface[]> {
-    return this.http
-      .get<BeerInterface[]>(
-        `https://api.punkapi.com/v2/beers?page=1&per_page=${perPage}`
-      )
-      .pipe(
-        map(beers => {
-          if (beerAvb == null) {
-            return beers;
-          }
-          return this.filterBeerByAvb(beers, beerAvb);
-        })
-      );
+    return this.http.get<BeerInterface[]>(`https://api.punkapi.com/v2/beers?page=1&per_page=${perPage}`).pipe(
+      map(beers => {
+        if (beerAvb == null) {
+          return beers;
+        }
+        return this.filterBeerByAvb(beers, beerAvb);
+      })
+    );
   }
 
   filterBeerByAvb(beers: BeerInterface[], beerAvb: string): BeerInterface[] {
@@ -47,12 +40,14 @@ export class BeerService {
   }
 
   getBeerById(id: string): Observable<BeerInterface> {
-    return this.http
-      .get<BeerInterface[]>(`https://api.punkapi.com/v2/beers/${id}`)
-      .pipe(
-        map(beer => {
-          return beer[0];
-        })
-      );
+    return this.http.get<BeerInterface[]>(`https://api.punkapi.com/v2/beers/${id}`).pipe(
+      map(beer => {
+        return beer[0];
+      })
+    );
+  }
+
+  beerAutocomplete(query: string, page: number): Observable<BeerInterface[]> {
+    return this.http.get<BeerInterface[]>('https://api.punkapi.com/v2/beers?page=' + page + '&beer_name=' + query);
   }
 }

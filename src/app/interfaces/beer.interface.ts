@@ -19,6 +19,14 @@ export interface BeerCategoryInterface {
   url: string;
 }
 
+export interface BeerIngridient {
+  malt: BeerIngredient[];
+  hops: BeerHopsIngredient[];
+  yeast: string;
+}
+
+export type BeerIngridientFilter = Omit<BeerIngridient, 'yeast'>;
+
 export interface BeerInterface {
   id: number;
   name: string;
@@ -52,11 +60,7 @@ export interface BeerInterface {
     };
     twist: null;
   };
-  ingredients: {
-    malt: BeerIngredient[];
-    hops: BeerHopsIngredient[];
-    yeast: string;
-  };
+  ingredients: BeerIngridient;
   food_pairing: string;
   brewers_tips: string;
   contributed_by: string;

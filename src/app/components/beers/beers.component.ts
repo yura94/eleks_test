@@ -1,23 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ColDef, ICellRendererParams } from 'ag-grid-community';
-import { map, switchMap } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 import { BeerInterface } from 'src/app/interfaces/beer.interface';
 import { SubCategory } from 'src/app/interfaces/subcategory.interface';
 import { BeerService } from 'src/app/services/beer.service';
+import { MaltBeerCellRendererComponent } from '../ag-grid/malt-beer-cell-renderer.component';
 import { NameCocktailCellRendererComponent } from '../ag-grid/name-cocktail-cell-renderer.component';
 
 @Component({
   templateUrl: './beers.component.html',
   styleUrls: ['./beers.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BeersComponent implements OnInit {
-  beerCategory: SubCategory[] = [];
+  beerCategory: SubCategory[] = this.beerService.beerCategory;
   beers: BeerInterface[] = [];
+  beers$?: Observable<BeerInterface[]>;
 
   constructor(
     private beerService: BeerService,
     private route: ActivatedRoute,
+    private cd: ChangeDetectorRef,
     private router: Router
   ) {
     this.router.events.subscribe(() => {
@@ -40,17 +44,13 @@ export class BeersComponent implements OnInit {
     { field: 'tagline' },
     { field: 'ph' },
     { field: 'first_brewed' },
+    { headerName: 'Malt', field: 'ingredients', cellRenderer: MaltBeerCellRendererComponent },
   ];
 
   ngOnInit() {
-    this.route.params
-      .pipe(
-        map(() => this.route.snapshot.paramMap.get('category')),
-        switchMap(beer => this.beerService.beer(80, beer))
-      )
-      .subscribe(beers => {
-        this.beers = beers;
-        this.beerCategory = this.beerService.beerCategory;
-      });
+    this.beers$ = this.route.params.pipe(
+      map(() => this.route.snapshot.paramMap.get('category')),
+      switchMap(beer => this.beerService.beer(80, beer))
+    );
   }
 }

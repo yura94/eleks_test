@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  failChance: 0.15,
+  failChance: 0,
 };
 
 /*

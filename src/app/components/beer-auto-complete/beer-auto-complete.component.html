@@ -1,0 +1,20 @@
+<form [formGroup]="beerSearchForm">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>beers name</mat-label>
+    <input matInput id="beerInput" formControlName="beerInput" value="" placeholder="enter at least 3 symbols" />
+    <span *ngIf="spinerLoading && isLoadMoreDisabled" class="spiner-wrapper" matSuffix>
+      <mat-spinner class="spiner" diameter="20"></mat-spinner>
+    </span>
+  </mat-form-field>
+
+  <button mat-button color="primary" id="loadMore" (click)="loadMore()" [disabled]="isLoadMoreDisabled">
+    Load More
+  </button>
+  <span *ngIf="spinerLoading && !isLoadMoreDisabled" class="spiner-wrapper" matSuffix>
+    <mat-spinner class="spiner" diameter="20"></mat-spinner>
+  </span>
+</form>
+<mat-list>
+  <mat-list-item class="beers" *ngFor="let beer of beersObsarvable$ | async"> {{ beer.name }} </mat-list-item>
+</mat-list>
+<p>{{ message }}</p>

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CocktailService } from 'src/app/services/cocktail.service';
-import { map, switchMap } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 import { SubCategory } from 'src/app/interfaces/subcategory.interface';
 import { ActivatedRoute } from '@angular/router';
 import { ColDef, ICellRendererParams } from 'ag-grid-community';
@@ -11,16 +11,14 @@ import { CocktailInterface } from 'src/app/interfaces/cocktail.interface';
 @Component({
   templateUrl: './cocktails.component.html',
   styleUrls: ['./cocktails.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CocktailsComponent implements OnInit {
-  constructor(
-    private cocktailService: CocktailService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private cocktailService: CocktailService, private cd: ChangeDetectorRef, private route: ActivatedRoute) {}
 
-  cocktailCategories: SubCategory[] = [];
+  cocktailCategories$?: Observable<SubCategory[]>;
   spinerLoading: boolean = true;
-  selectedCoctailCategory: CocktailInterface[] = [];
+  selectedCoctailCategory$?: Observable<CocktailInterface[]>;
 
   columnDefs: ColDef[] = [
     {
@@ -40,34 +38,27 @@ export class CocktailsComponent implements OnInit {
   ];
 
   ngOnInit() {
-    this.cocktailService
-      .cocktailsCategory()
-      .pipe(
+    let cocktailCategories = this.cocktailService.cocktailsCategory();
+    if (cocktailCategories === null) {
+      return;
+    } else {
+      this.cocktailCategories$ = this.cocktailService.cocktailsCategory().pipe(
         map(category => {
+          this.spinerLoading = false;
           return category.drinks.map(value => ({
             label: value.strCategory,
             value: value.strCategory,
             url: '/cocktails',
           }));
         })
-      )
-      .subscribe(categories => {
-        this.cocktailCategories = categories;
-        this.spinerLoading = false;
-      });
+      );
+    }
 
-    this.route.params
-      .pipe(
-        map(() => this.route.snapshot.paramMap.get('category')),
-        switchMap(activeCocktailRoute =>
-          this.cocktailService
-            .cocktails(activeCocktailRoute)
-            .pipe(map(category => category.drinks))
-        )
+    this.selectedCoctailCategory$ = this.route.params.pipe(
+      map(() => this.route.snapshot.paramMap.get('category')),
+      switchMap(activeCocktailRoute =>
+        this.cocktailService.cocktails(activeCocktailRoute).pipe(map(category => category.drinks))
       )
-      .subscribe(categories => {
-        this.selectedCoctailCategory = categories;
-        console.log('cat', categories);
-      });
+    );
   }
 }

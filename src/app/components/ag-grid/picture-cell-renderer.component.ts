@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 
 @Component({
   template: `<img [src]="params?.value" />`,
   styles: ['img { width: 40px;}'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PictureCellRendererComponent implements ICellRendererAngularComp {
   public params: ICellRendererParams | null = null;

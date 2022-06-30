@@ -1,0 +1,28 @@
+<div class="login-container">
+  <form [formGroup]="beerBuilderForm">
+    <mat-form-field appearance="fill">
+      <mat-label>beer malt</mat-label>
+      <mat-select formControlName="beerMalt">
+        <mat-option *ngFor="let malt of malt$ | async" [value]="malt">{{ malt }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>beer hops</mat-label>
+      <mat-select formControlName="beerHops">
+        <mat-option *ngFor="let hopsname of hops$ | async" [value]="hopsname">{{ hopsname }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>beer ibu</mat-label>
+      <mat-select formControlName="beerIbu">
+        <mat-option *ngFor="let ibuname of ibu$ | async" [value]="ibuname">{{ ibuname }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>beer name</mat-label>
+      <mat-select formControlName="beerName">
+        <mat-option *ngFor="let name of name$ | async" [value]="name">{{ name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>

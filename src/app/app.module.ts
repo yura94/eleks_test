@@ -5,6 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import {MatListModule} from '@angular/material/list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +30,10 @@ import { AgGridModule } from 'ag-grid-angular';
 import { PictureCellRendererComponent } from './components/ag-grid/picture-cell-renderer.component';
 import { NameCocktailCellRendererComponent } from './components/ag-grid/name-cocktail-cell-renderer.component';
 import { FailInterceptor } from './interceptors/fail.interceptor';
+import { MaltBeerCellRendererComponent } from './components/ag-grid/malt-beer-cell-renderer.component';
+import { BeerBuilderDropDownComponent } from './components/beer-builder-dropDown/beer-builder-dropDown.component';
+import { BeerAutoCompleteComponent } from './components/beer-auto-complete/beer-auto-complete.component';
+import { NavBarPipe } from './pipes/nav-bar.pipe';
 
 @NgModule({
   declarations: [
@@ -45,6 +51,10 @@ import { FailInterceptor } from './interceptors/fail.interceptor';
     CocktailItemComponent,
     PictureCellRendererComponent,
     NameCocktailCellRendererComponent,
+    MaltBeerCellRendererComponent,
+    BeerBuilderDropDownComponent,
+    BeerAutoCompleteComponent,
+    NavBarPipe,
   ],
   imports: [
     BrowserModule,
@@ -54,9 +64,15 @@ import { FailInterceptor } from './interceptors/fail.interceptor';
     MatButtonModule,
     MatButtonToggleModule,
     MatInputModule,
+    MatSelectModule,
+    MatListModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
-    AgGridModule.withComponents([PictureCellRendererComponent, NameCocktailCellRendererComponent]),
+    AgGridModule.withComponents([
+      PictureCellRendererComponent,
+      NameCocktailCellRendererComponent,
+      MaltBeerCellRendererComponent,
+    ]),
   ],
   providers: [
     CocktailService,
