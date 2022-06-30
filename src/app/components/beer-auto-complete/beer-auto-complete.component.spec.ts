@@ -146,6 +146,7 @@ describe('AutoComplete Components', () => {
     expect(beersElementsCount.length).toBe(25);
     loadMoreClick.click();
     expect(beerService.beerAutocomplete).toHaveBeenCalledWith('sss', 2);
-    expect(beersElementsCount.length).toBe(50);
+    fixture.detectChanges();
+    expect(beersElementsCount.length).toBe(25);
   }));
 });

@@ -55,7 +55,7 @@ export class AuthService {
   }
   logout(): void {
     window.localStorage.removeItem('userData');
-    this.router.navigate(['beer']);
+    this.router.navigate(['']);
     window.dispatchEvent(new StorageEvent('storage'));
   }
 
