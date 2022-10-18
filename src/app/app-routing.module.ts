@@ -7,11 +7,12 @@ import { CocktailsComponent } from './components/cocktails/cocktails';
 import { HomeComponent } from './components/homePage/home-page.component';
 import { NotFoundComponent } from './components/notFound/not-found.component';
 import { AuthGuard } from './auth.guard';
-import { WrapperComponent } from './components/wrapper/wrapper.component';
 import { BeerItemComponent } from './components/beer-item/beer-item.component';
 import { CocktailItemComponent } from './components/cocktail-item/cocktails-item.component';
 import { BeerBuilderDropDownComponent } from './components/beer-builder-dropDown/beer-builder-dropDown.component';
 import { BeerAutoCompleteComponent } from './components/beer-auto-complete/beer-auto-complete.component';
+import { SubscriptionComponent } from './components/subscription/subscription.component';
+import { WrapperComponent } from './components/wrapper/wrapper.component';
 
 const appRoutes: Routes = [
   {
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
       { path: 'beer/builder', component: BeerBuilderDropDownComponent },
       { path: 'beer/autoComplete', component: BeerAutoCompleteComponent },
       { path: 'beer/:id', component: BeerItemComponent },
+      { path: 'subscription', component: SubscriptionComponent },
       {
         path: 'cocktails',
         component: CocktailsComponent,

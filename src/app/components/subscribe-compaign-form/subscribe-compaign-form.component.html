@@ -1,0 +1,46 @@
+<form
+  [formGroup]="subscriptionFormGroup"
+  (ngSubmit)="onSubmit()"
+  style="display: flex; flex-direction: column; align-items: flex-start">
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input class="nameField" formControlName="name" matInput />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>description</mat-label>
+    <input class="passwordField" formControlName="description" matInput type="password" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Rooms</mat-label>
+    <input class="roomsField" formControlName="rooms" matInput />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Tenant level</mat-label>
+    <mat-select class="levelField" formControlName="tenantLevel">
+      <mat-option *ngFor="let tenant of tenantLevelType" [value]="tenant.value">
+        {{ tenant.value }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field
+    class="dateField"
+    *ngIf="subscriptionType !== 'compaign'"
+    appearance="fill"
+    class="example-form-field"
+    style="width: 200px">
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [rangePicker]="picker">
+      <input formControlName="dateStart" matStartDate placeholder="Start date" />
+      <input formControlName="dateEnd" matEndDate placeholder="End date" />
+    </mat-date-range-input>
+    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker>
+      <mat-date-range-picker-actions>
+        <button mat-button matDateRangePickerCancel>Cancel</button>
+        <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+      </mat-date-range-picker-actions>
+    </mat-date-range-picker>
+  </mat-form-field>
+  <button class="submit" mat-button color="primary">{{ submit }}</button>
+</form>

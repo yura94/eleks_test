@@ -1,0 +1,28 @@
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer class="example-sidenav" #drawer mode="side">
+    <div *ngIf="!isFormVisible">
+      <mat-radio-group aria-label="Select an option" class="radioButton" [formControl]="subscriptionControl">
+        <mat-radio-button *ngFor="let item of subscriptionType | keyvalue" [value]="item.value">{{
+          item.value
+        }}</mat-radio-button>
+      </mat-radio-group>
+      <div>
+        <button #button mat-button color="primary" [disabled]="!subscriptionControl" (click)="showForm()">Next</button>
+      </div>
+    </div>
+
+    <app-add-form
+      class="app-form-component"
+      *ngIf="isFormVisible"
+      (isFormEmpty)="isFormEmpty($event)"
+      [data]="editSubscription"
+      [subscriptionType]="selectedSubscriptionType"
+      (formSubmit)="hideForm($event)"></app-add-form>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawToggle()">
+      {{ toggleSideNavButton }}
+    </button>
+  </div>
+</mat-drawer-container>

@@ -6,9 +6,12 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BeersComponent } from './components/beers/beers.component';
 import { CocktailsComponent } from './components/cocktails/cocktails';
@@ -21,8 +24,8 @@ import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { NavBarComponent } from './components/navBar/nav-bar.component';
+import { MatRadioModule } from '@angular/material/radio';
 import { HomeComponent } from './components/homePage/home-page.component';
-import { WrapperComponent } from './components/wrapper/wrapper.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
 import { BeerItemComponent } from './components/beer-item/beer-item.component';
 import { CocktailItemComponent } from './components/cocktail-item/cocktails-item.component';
@@ -34,6 +37,15 @@ import { MaltBeerCellRendererComponent } from './components/ag-grid/malt-beer-ce
 import { BeerBuilderDropDownComponent } from './components/beer-builder-dropDown/beer-builder-dropDown.component';
 import { BeerAutoCompleteComponent } from './components/beer-auto-complete/beer-auto-complete.component';
 import { NavBarPipe } from './pipes/nav-bar.pipe';
+import { AddNewComponent } from './components/subscribe-new-subscribe-compaigne/add-new-subscribe-compaigne.component';
+import { AddNewFormComponent } from './components/subscribe-compaign-form/subscribe-compaign-form.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { SubscriptionComponent } from './components/subscription/subscription.component';
+import { SubscriptionService } from './services/subscription.service';
+import { AddSubscriptionService } from './services/add-subscription.service';
+import { WrapperComponent } from './components/wrapper/wrapper.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from './components/confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +57,6 @@ import { NavBarPipe } from './pipes/nav-bar.pipe';
     LoginComponent,
     NavBarComponent,
     HomeComponent,
-    WrapperComponent,
     CategoryListComponent,
     BeerItemComponent,
     CocktailItemComponent,
@@ -55,7 +66,13 @@ import { NavBarPipe } from './pipes/nav-bar.pipe';
     BeerBuilderDropDownComponent,
     BeerAutoCompleteComponent,
     NavBarPipe,
+    AddNewComponent,
+    AddNewFormComponent,
+    SubscriptionComponent,
+    WrapperComponent,
+    DialogComponent,
   ],
+  entryComponents: [DialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -64,9 +81,15 @@ import { NavBarPipe } from './pipes/nav-bar.pipe';
     MatButtonModule,
     MatButtonToggleModule,
     MatInputModule,
+    MatDialogModule,
     MatSelectModule,
     MatListModule,
+    MatSidenavModule,
     ReactiveFormsModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    MatNativeDateModule,
     MatProgressSpinnerModule,
     AgGridModule.withComponents([
       PictureCellRendererComponent,
@@ -75,7 +98,9 @@ import { NavBarPipe } from './pipes/nav-bar.pipe';
     ]),
   ],
   providers: [
+    AddSubscriptionService,
     CocktailService,
+    SubscriptionService,
     BeerService,
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: FailInterceptor, multi: true },

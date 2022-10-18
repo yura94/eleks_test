@@ -62,7 +62,6 @@ export class AuthService {
   private autentifacate(user: User): void {
     window.localStorage.setItem('userData', JSON.stringify(user));
     window.dispatchEvent(new StorageEvent('storage'));
-    // window.addEventListener('storage', function () {}, false);
   }
 
   source$: Observable<boolean> = fromEvent(window, 'storage').pipe(

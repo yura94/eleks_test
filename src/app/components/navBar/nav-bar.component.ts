@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavBarComponent implements OnInit {
   constructor(private authservice: AuthService, public ref: ChangeDetectorRef) {}
   public isAuthenticated$?: Observable<boolean>;
+  isShow: boolean = false;
   ngOnInit(): void {
     this.isAuthenticated$ = this.authservice.source$.pipe(tap(e => console.log(e)));
   }
